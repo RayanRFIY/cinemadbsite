@@ -116,16 +116,17 @@ switch ($table) {
     case 'proiezioni':
         $codfilm = $_POST["codfilm"];
         $codsala = $_POST["codsala"];
+        $incasso = $_POST["incasso"];
         $oraproiezione = $_POST["oraproiezione"];
         $errormessage = "Errore nell'inserimento in $table, controllare i campi compilati!";
-
-        if(!isValid($codfilm) || !isValid($codsala) || !isValid($citta)){
+        
+        if(!isValid($codfilm) || !isValid($codsala) || !isValid($oraproiezione) || !isValid($incasso)){
             $_SESSION["insert_error"] = $errormessage;
             redirect($lastpage);
         }
 
-        $sql = "insert into sale(codfilm,codsala,oraproiezione)
-                value('$codfilm','$codsala','$oraproiezione')";
+        $sql = "insert into proiezioni(codfilm,codsala,incasso,oraproiezione)
+                value('$codfilm','$codsala','$incasso','$oraproiezione')";
         $conn->query($sql);
 
         if($conn->affected_rows < 0)

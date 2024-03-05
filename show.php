@@ -17,11 +17,10 @@ session_start();
 
 <body class="position-relative" onload="createTable()">
     <?php
+    include_once("./connectdb.php");
+    include_once("./credentialscheck.php");
 
-include_once("./connectdb.php");
-include_once("./credentialscheck.php");
-
-$conn = getConn();
+    $conn = getConn();
 
 
     $username = checkSessionCredentials($conn);
@@ -130,7 +129,7 @@ $conn = getConn();
         <div class="add-element-table">
             <form action="./insertform.php" method="post" class="pb-5">
                 <?php
-                    echo "<input type='text' name='table' class='d-none' value='$table'>";
+                    echo "<input type='hidden' name='table' class='d-none' value='$table'>";
                     
                     switch ($table) {
                         case 'recensioni':

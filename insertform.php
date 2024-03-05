@@ -74,6 +74,7 @@ $username = checkSessionCredentials($conn);
                         $codfilm = $row["codfilm"];
                         $form .= "<option value='$codfilm' style='text-transform:capitalized;'>$title</option>";
                     }
+                    $title = "";
                 }
                 else{
                     redirect($lastpage);
@@ -82,6 +83,8 @@ $username = checkSessionCredentials($conn);
                 $form .="</select>";
             }
             else{
+                $form .= "<input type='hidden' name='codfilm' class='d-none' value='$codfilm'>";
+                
                 $result = $conn->query("select codfilm,titolo from film where codfilm = '$codfilm'");
 
                 if($result->num_rows > 0){
@@ -100,7 +103,6 @@ $username = checkSessionCredentials($conn);
                     <option value ='4'>4</option>
                     <option value ='5'>5</option>
                     </select>
-                    <input type='text' name='codfilm' class='d-none' value='$codfilm'>
                     ";
             $header = "RECENSIONE $title";
             break;
@@ -117,13 +119,46 @@ $username = checkSessionCredentials($conn);
             break;
         case 'proiezioni':
 
-            $codsala = $_POST["codsala"];
+            $codsala = isset($_POST["codsala"]) ? $_POST["codsala"] : "";
+            $name = "";
 
-            $form = "<label for='codfilm' class='label'>Film</label>
+            if(!isValid($codsala)){
+                $form = "<label for='codsala' class='label'>Sala</label>
+                    <select name='codsala' class='input' required>";
+
+                $result = $conn->query("select codsala,nome from sale");
+
+                if($result->num_rows > 0){
+                    while ($row = $result->fetch_assoc()) {
+                        $name = $row["nome"];
+                        $codsala = $row["codsala"];
+                        $form .= "<option value='$codsala' style='text-transform:capitalized;'>$name</option>";
+                    }
+                    $name = "";
+                }
+                else{
+                    redirect($lastpage);
+                }
+                        
+                $form .="</select>";
+            }
+            else{
+                $form .= "<input type='hidden' name='codsala' class='d-none' value='$codsala'>";
+                $result = $conn->query("select nome from sale where codsala = '$codsala'");
+    
+                if($result->num_rows > 0){
+                    $row = $result->fetch_assoc();
+                    $name = "PER " . $row["nome"];
+                }
+                else{
+                    redirect($lastpage);
+                }
+            }
+
+            $form .= "<label for='codfilm' class='label'>Film</label>
                     <select name='codfilm' class='input' required>";
 
             $result = $conn->query("select codfilm,titolo from film");
-            $name = "";
 
             if($result->num_rows > 0){
                 while ($row = $result->fetch_assoc()) {
@@ -131,29 +166,18 @@ $username = checkSessionCredentials($conn);
                     $codfilm = $row["codfilm"];
                     $form .= "<option value='$codfilm' style='text-transform:capitalized;'>$title</option>";
                 }
+                $title = "";
             }
             else{
                 redirect($lastpage);
             }
                     
-            $form .="</select>";
-
-            $result = $conn->query("select nome from sale where codsala = '$codsala'");
-
-            if($result->num_rows > 0){
-                $row = $result->fetch_assoc();
-                $name = $row["nome"];
-                
-            }
-            else{
-                redirect($lastpage);
-            }
-                    
-            $form .="<label for='incasso' class='label'>Incasso</label>
+            $form .="</select>
+                    <label for='incasso' class='label'>Incasso</label>
                     <input type='number' name='incasso' min='0' class='input' required>
                     <label for='oraproiezione' class='label'>Ora di Proiezione</label>
                     <input type='time' name='oraproiezione' value='00:00' class='input' required>";
-            $header = "PROIEZIONE PER " . $name;
+            $header = "PROIEZIONE " . $name;
             break;
         default:
             redirect($lastpage);
