@@ -1,0 +1,177 @@
+html{
+	height: 100%;
+}
+
+body{
+	min-height: 100%;
+}
+
+#login-form{
+	height: 320px;
+	width: 400px;
+	border-radius: 5px;
+	box-shadow: black 1px 1px 10px 1px;
+	position: absolute;
+	top: 0;
+	bottom: 10%;
+	right: 0;
+	left: 0;
+	margin: auto;
+}
+
+#register-form, #update-form, #insert-form {
+	height: 550px;
+	width: 400px;
+	border-radius: 5px;
+	box-shadow: black 1px 1px 10px 1px;
+	position: absolute;
+	top: 0;
+	bottom: 10%;
+	right: 0;
+	left: 0;
+	margin: auto;
+}
+
+#register-form, #login-form, #update-form, #insert-form{
+	height: fit-content !important;
+}
+
+#insert-form input, #insert-form select{
+	border: 2px solid lime;
+}
+
+#insert-form button{
+	background-color: lime;
+	outline: unset;
+	border: 1px solid lime;
+}
+
+#update-form input, #update-form select{
+	border: 2px solid purple;
+}
+
+#update-form button{
+	background-color: purple;
+	outline: unset;
+	 border: 1px solid purple;
+}
+
+#account {
+	position: fixed;
+	display: flex;
+	top: 0;
+	right: 0;
+	z-index: 2;
+}
+.logout{
+	margin: inherit;
+}
+
+.input {
+	height: 40px;
+	border-radius: 15px;
+	border: rgb(0, 140, 255) 2px solid;
+}
+.input:focus {
+	outline: none;
+	transition: 0.4s;
+	border: red 2px solid;
+}
+
+.label {
+	align-self: baseline;
+}
+
+.fake-link {
+	cursor: pointer;
+	border: none;
+	background-color: unset;
+	color: rgb(0, 140, 255);
+	text-decoration: underline;
+}
+
+
+.select-table tr td,
+.select-table tr th {
+	border: 2px #f7d200 solid;
+	height: 50px;
+	padding-right: 5px; padding-left: 5px;
+}
+
+.select-table{
+	text-align: center;
+	text-transform: capitalize;
+	margin: 0;
+	position: absolute;
+	left: 0; right: 0; top: 50%;
+	transform: translateY(-50%);
+}
+
+.header{
+	cursor: pointer;
+	user-select: none;
+}
+
+.display {
+	border: 1px solid grey;
+	width: fit-content;
+    /* margin: auto; */	
+    /* right: 50%; */
+    max-height: 350px;
+    overflow-y: scroll;
+}
+
+.select-title{
+	padding-bottom: 30px;
+}
+
+select{
+	text-transform: capitalize;
+}
+
+input{
+	pointer-events:fill;
+}
+
+.card-displayer{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: fit-content;
+	margin: auto;
+	padding-top: 10%;
+}
+
+.table-card{
+	min-width: 300px;
+	background-color: #f7d200;
+}
+
+.table-card div{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.table-card div form{
+	width: fit-content;
+	align-self: center;
+	padding-bottom: 2rem;
+}
+
+.table-card div h1{
+	width: fit-content;
+	align-self: center;
+	padding-bottom: 2rem;
+}
+
+.table-card div form button{
+	background-color: #ceb735;
+	height: 30px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+	color: white;
+}
